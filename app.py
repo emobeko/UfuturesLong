@@ -36,8 +36,10 @@ def webhook():
         response = um_futures_client.new_order(**params)
         print(response)
 
-    except:
-        pass
+    except Exception as e:
+        print(f"Error: {str(e)}")
+        raise
+
     return {
         "code": "success",
     }
