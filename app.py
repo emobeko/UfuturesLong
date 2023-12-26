@@ -1,7 +1,6 @@
 from flask import Flask, request
 import json
-from binance.um_futures import UMFutures as Client
-
+from binance.um_futures import UMFutures
 
 app = Flask(__name__)
 
@@ -26,16 +25,16 @@ def webhook():
             "type": "MARKET",
             "quantity": quantity,
         }
-        Client(binanceApiKey, binanceSecretKey).new_order(**params)
+        um_futures_client = UMFutures()
 
+        print(um_futures_client.time())
 
+        um_futures_client = UMFutures(key='binanceApikey', secret='binanceSecretkey')
 
-    except:
-        pass
-    return {
-        "code": "success",
-    }
+        print(um_futures_client.account())
 
+        response = um_futures_client.new_order(**params)
+        print(response)
 
 
 
