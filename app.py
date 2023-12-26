@@ -15,8 +15,8 @@ def webhook():
         price = data['price']
         side = data['side']
         quantity = data['quantity']
-        binanceApiKey = data['binanceApiKey']
-        binanceSecretKey = data['binanceSecretKey']
+        key = data['binanceApiKey']
+        secret = data['binanceSecretKey']
 
         params = {
             "symbol": ticker,
@@ -29,13 +29,18 @@ def webhook():
 
         print(um_futures_client.time())
 
-        um_futures_client = UMFutures(key='binanceApikey', secret='binanceSecretkey')
+        um_futures_client = UMFutures(key=key, secret=secret)
 
         print(um_futures_client.account())
 
         response = um_futures_client.new_order(**params)
         print(response)
 
+    except:
+        pass
+    return {
+        "code": "success",
+    }
 
 
 
